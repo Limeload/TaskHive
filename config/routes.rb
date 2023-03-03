@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  resources :task_tags
+  resources :tags
+  resources :projects
+  resources :comments
+  resources :tasks
+  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/hello', to: 'application#hello_world'
-  # Defines the root path route ("/")
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+    # Defines the root path route ("/")
   # root "articles#index"
 end
