@@ -1,8 +1,8 @@
-**TaskHive**
+# TaskHive: Manage Your Tasks Like a Pro!
 
 This is a web application for managing tasks. The application allows users to create tasks, assign tasks to projects, set deadlines, prioritize tasks, and track their progress.
 
-*User Stories*
+## User Stories
 
 * As a user, I can:
 * Create an account, login, and logout.
@@ -18,7 +18,7 @@ This is a web application for managing tasks. The application allows users to cr
 * Search for tasks by keywords or tags.
 * Receive email notifications when a task is due or assigned to me.
 
-*Technologies Used*
+## Technologies Used
 
 This application is built using Ruby on Rails and utilizes the following technologies:
 
@@ -26,9 +26,12 @@ This application is built using Ruby on Rails and utilizes the following technol
 * Rails 6.1.4
 * PostgreSQL 13.3
 * TailwindCSS 3.2.7
-* Devise 4.8.0
-* Simple Form 5.1.2
+* Bcrypt 3.1.7
 
-**Contribution**
+## Figma
+
+[TaskHive](https://www.figma.com/file/cuFDj1wmoK42kdfeHtmxix/Phase-4-Wireframe?node-id=0%3A1&t=Wt83qTjW73HObg65-0)
+
+## Contribution
 
 If you'd like to contribute to this project, feel free to submit a pull request or create an issue.
