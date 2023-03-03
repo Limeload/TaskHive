@@ -18,6 +18,14 @@ This is a web application for managing tasks. The application allows users to cr
 * Search for tasks by keywords or tags.
 * Receive email notifications when a task is due or assigned to me.
 
+## Models and Relationships
+
+![](client/src/images/models.png)
+
+## Domain models
+
+[TaskHive](https://docs.google.com/spreadsheets/d/1Jy8-ScumjohELYO-zfEBAHp6ZgrqwGk9c8cuzjYIl1w/edit#gid=0)
+
 ## Technologies Used
 
 This application is built using Ruby on Rails and utilizes the following technologies:
