@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: TaskHive_production
-  username: TaskHive
-  password: <%= ENV["TASKHIVE_DATABASE_PASSWORD"] %>
+url: <%= ENV['DATABASE_URL'] %>
