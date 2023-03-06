@@ -5,7 +5,8 @@ class CreateTasks < ActiveRecord::Migration[7.0]
       t.text :description
       t.datetime :deadline
       t.integer :priority
-      t.belongs_to :user, null: false, foreign_key: true
+      t.integer :user_id
+      t.integer :project_id
       t.boolean :completed
 
       t.timestamps

@@ -16,20 +16,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_194802) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "task_id", null: false
+    t.integer "user_id"
+    t.integer "task_id"
+    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_comments_on_task_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id", null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -39,12 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_194802) do
   end
 
   create_table "task_tags", force: :cascade do |t|
-    t.bigint "task_id", null: false
-    t.bigint "tag_id", null: false
+    t.integer "task_id"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tag_id"], name: "index_task_tags_on_tag_id"
-    t.index ["task_id"], name: "index_task_tags_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -52,11 +48,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_194802) do
     t.text "description"
     t.datetime "deadline"
     t.integer "priority"
-    t.bigint "user_id", null: false
+    t.integer "user_id"
+    t.integer "project_id"
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,10 +63,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_194802) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "comments", "tasks"
-  add_foreign_key "comments", "users"
-  add_foreign_key "projects", "users"
-  add_foreign_key "task_tags", "tags"
-  add_foreign_key "task_tags", "tasks"
-  add_foreign_key "tasks", "users"
 end
