@@ -2,10 +2,10 @@ class ApplicationController < ActionController::API
   #SESSIONS & COOKIES
   include ActionController::Cookies
 
-  def hello_world
-      session[:count] = (session[:count] || 0) + 1
-      render json: { count: session[:count] }
-    end
+#USER_AUTH
+def current_user
+  User.find_by(id: session[:user_id])
+end
 
 #ERROR HANDLING
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
