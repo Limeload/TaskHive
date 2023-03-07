@@ -2,11 +2,11 @@ import React from "react";
 
 
 
-function Task({ title, description, deadline, priority, completed }) {
+function ProjectPageTask({title, description, deadline, priority, completed}) {
 
-  return (
-    <div className='Task'>
-      <table>
+    return (
+        <div className='Task'>
+        <table>
         <tr>
           <th>Task</th>
           <th>Description</th>
@@ -22,9 +22,9 @@ function Task({ title, description, deadline, priority, completed }) {
           <td>{completed}</td>
         </tr>
       </table>
-    </div>
-  )
+        </div>
+    )
 }
 
 
-export default Task
+export default ProjectPageTask

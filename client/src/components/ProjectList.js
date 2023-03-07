@@ -1,15 +1,22 @@
 import React from "react";
+import Project from "/Project"
 
 
+function ProjectList({projects, passProjectId}) {
 
-function ProjectList() {
-
-
-
-
+    const projectMap = projects.map(project => {
+        return <Project
+            id={project.id}
+            name={project.name}
+            key={project.id}
+            passProjectId={passProjectId}
+        />
+    })
 
     return (
-        <div className='ProjectList'></div>
+        <div className='ProjectList'>
+        {projectMap}
+        </div>
     )
 }
 

@@ -1,15 +1,19 @@
 import React from "react";
 
 
+function Project({id, name, passProjectId}) {
 
-function Project() {
-
-
+    function handleClick() {
+        passProjectId(id)
+        // this will pass id and will take you to the project with this specific specific project page
+    }
 
 
 
     return (
-        <div className='Project'></div>
+        <div onClick={handleClick} className='Project'>
+        <h2>{name}</h2>
+        </div>
     )
 }
 
