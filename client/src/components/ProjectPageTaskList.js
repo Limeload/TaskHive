@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectPageTask from "/Task"
+import ProjectPageTask from "./Task.js"
 
 
 function ProjectPageTaskList({projectTasks}) {
