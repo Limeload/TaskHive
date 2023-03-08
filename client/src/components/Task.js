@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-function Task({ title, description, deadline, priority, completed }) {
+function Task({ title, description, deadline, priority, completed, onEditTask }) {
 
   const initialFormValues = {
     description: "",
@@ -38,7 +38,7 @@ function Task({ title, description, deadline, priority, completed }) {
     fetch("users/:id/tasks", requestObj)
     .then(response => response.json())
     .then(modifiedTask => {
-        // onEditUserProfile(formData)
+        onEditTask(formData)
         setFormData(initialFormValues)
         setShowingForm(false)
     })

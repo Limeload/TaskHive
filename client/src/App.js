@@ -45,6 +45,12 @@ function App() {
      .then(res => res.json())
      .then(userTaskData => setUserTasks(userTaskData.tasks))
 
+     // edits task
+     function onEditTask(modifiedTask) {
+      const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedUser : task)
+      setUserTasks(updateTask)
+     }
+
   return (
     <div className="App">
       <h1>Task Hive
@@ -56,7 +62,7 @@ function App() {
       <div className='mainContainer'>
         <Home />
         <NotFound />
-        <UserTaskList userTasks={userTasks}/>
+        <UserTaskList userTasks={userTasks} onEditTask={onEditTask}/>
         <CommentList />
         <TagList />
         <ProjectList projects={projects} passProjectId={passProjectId}/>
