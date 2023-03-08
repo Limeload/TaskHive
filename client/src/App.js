@@ -14,6 +14,7 @@ function App() {
   const [projects, setProjects] = useState([])
   const [userTasks, setUserTasks] = useState([])
 
+
   useEffect(() => {
     fetch("/hello")
       .then((r) => r.json())
@@ -22,7 +23,7 @@ function App() {
 
     // Project Fetch
      fetch("/projects")
-     .then(res => res.json)
+     .then(res => res.json())
      .then(projectData => setProjects(projectData))
 
      // passes project id
@@ -38,7 +39,7 @@ function App() {
      }
 
      // Task Fetch
-     fetch("/user/:id")
+     fetch(`/user/:id`)
      .then(res => res.json())
      .then(userTaskData => setUserTasks(userTaskData.tasks))
 
