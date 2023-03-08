@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import ProjectPageTaskList from "./ProjectPageTaskList"
 
 function ProjectPage({projectId}) {
@@ -8,9 +8,11 @@ function ProjectPage({projectId}) {
     const [taskData, setTaskData] = useState(taskInput)
     const [addNewTasks, setaddNewTasks] = useState([])
 
-    fetch(`/projects/${projectId}`)
-    .then(res => res.json())
-    .then(projectData => setProject(projectData))
+    useEffect(() => {
+        fetch(`/projects/${projectId}`)
+            .then(res => res.json())
+            .then(projectData => setProject(projectData))
+      }, [])
 
     function handleTaskData(e) {
         const { name, value } = e.target;
