@@ -2,6 +2,9 @@ import React from "react";
 import Project from "./Project"
 
 
+
+
+
 function ProjectList({projects, passProjectId}) {
 
     const projectMap = projects.map(project => {
