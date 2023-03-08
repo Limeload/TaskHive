@@ -1,79 +1,59 @@
 import React, { useState, useEffect } from "react";
 import Home from './components/Home.js'
 import Profile from './components/Profile.js'
-import ProjectList from './components/Project.js'
-import UserTaskList from './components/UserTaskList.js'
-import TagList from './components/TagList.js'
-import CommentList from './components/CommentList.js'
-import NotFound from './components/NotFound.js'
-import ProjectForm from "./components/ProjectForm"
-import ProjectPage from "./components/ProjectPage"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginForm from './components/LoginForm.js';
+import SignupForm from './components/SignupForm.js';
+import ErrorBoundary from "./components/ErrorBoundary.js";
+import './App.css';
+import UserContextProvider from "./components/UserContext.js";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [projects, setProjects] = useState([])
-  const [userTasks, setUserTasks] = useState([])
-
-
+  //LOGIN FEATURE FOR CURRENT USER
+  const [currentUser, setCurrentUser] = useState(null)
   useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
+    fetch('/me')
+      .then(response => {
+        if(response.ok) {
+          response.json()
+          .then((user) => setCurrentUser(user))
+        }
+      })
+  }, [])
 
-    // Project Fetch
-     fetch("/projects")
-     .then(res => res.json())
-     .then(projectData => setProjects(projectData))
+  function onLogIn(loggedInUser) {
+    setCurrentUser(loggedInUser)
+  }
 
-     // passes project id
-        let projectId;
-     const passProjectId = (id) => {
-         projectId = id
-     }
-
-     // project form helper function
-     const addNewProject = (newProject) => {
-        const newProjectData = [...projects, newProject]
-        setProjects(newProjectData)
-     }
-
-     // Task Fetch
-     fetch(`/user/:id`)
-     .then(res => res.json())
-     .then(userTaskData => setUserTasks(userTaskData.tasks))
-
-     // edits task
-     function onEditTask(modifiedTask) {
-      const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedUser : task)
-      setUserTasks(updateTask)
-     }
-
-     function onDeleteTask(id) {
-        const updatedUserTasks = userTasks.filter((task) => task.id !== id)
-        setUserTasks(updatedUserTasks)
-      }
+  function onLogOut(){
+    setCurrentUser(null)
+  }
 
   return (
-    <div className="App">
-      <h1>Task Hive
-        {/* {count} */}
-      </h1>
-      <div className='navBar'>
-        <Profile />
+    <UserContextProvider>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <ErrorBoundary>
+                <LoginForm onLogIn={onLogIn} />
+                </ErrorBoundary>
+            </Route>
+            <Route exact path='/signup'>
+              <SignupForm onLogIn={onLogIn}/>
+            </Route>
+            <Route path="/profile">
+              <Profile onLogOut={onLogOut} currentUser={currentUser} />
+            </Route>
+          </Switch>
+        </Router>
       </div>
-      <div className='mainContainer'>
-        <Home />
-        <NotFound />
-        <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
-        <CommentList />
-        <TagList />
-        <ProjectList projects={projects} passProjectId={passProjectId}/>
-        <ProjectPage projectId={projectId}/>
-        <ProjectForm addNewProject={addNewProject}/>
-      </div>
-    </div>
+    </UserContextProvider>
   );
 }
 
 export default App;
+
