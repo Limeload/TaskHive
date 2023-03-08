@@ -10,24 +10,24 @@ import UserContextProvider from "./components/UserContext.js";
 
 function App() {
   //LOGIN FEATURE FOR CURRENT USER
-  const [currentUser, setCurrentUser] = useState(null)
-  useEffect(() => {
-    fetch('/me')
-      .then(response => {
-        if(response.ok) {
-          response.json()
-          .then((user) => setCurrentUser(user))
-        }
-      })
-  }, [])
+  // const [currentUser, setCurrentUser] = useState(null)
+  // useEffect(() => {
+  //   fetch('/me')
+  //     .then(response => {
+  //       if(response.ok) {
+  //         response.json()
+  //         .then((user) => setCurrentUser(user))
+  //       }
+  //     })
+  // }, [])
 
-  function onLogIn(loggedInUser) {
-    setCurrentUser(loggedInUser)
-  }
+  // function onLogIn(loggedInUser) {
+  //   setCurrentUser(loggedInUser)
+  // }
 
-  function onLogOut(){
-    setCurrentUser(null)
-  }
+  // function onLogOut(){
+  //   setCurrentUser(null)
+  // }
 
   return (
     <UserContextProvider>
@@ -46,7 +46,8 @@ function App() {
               <SignupForm onLogIn={onLogIn}/>
             </Route>
             <Route path="/profile">
-              <Profile onLogOut={onLogOut} currentUser={currentUser} />
+              <Profile />
+              {/* <Profile onLogOut={onLogOut} currentUser={currentUser} /> */}
             </Route>
           </Switch>
         </Router>
