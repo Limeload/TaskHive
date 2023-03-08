@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-function Task({ title, description, deadline, priority, completed, onEditTask }) {
+function Task({ title, description, deadline, priority, completed, onEditTask, onDeleteTask }) {
 
   const initialFormValues = {
     description: "",
@@ -77,6 +77,13 @@ function Task({ title, description, deadline, priority, completed, onEditTask })
         </input>
     </form>
 
+    function handleDeleteTask() {
+      fetch('/users/:id/tasks/:id', {
+        method: "DELETE"
+      })
+      .then(() => onDeleteTask(id))
+    }
+
   return (
     <div className='Task'>
       <table>
@@ -95,6 +102,7 @@ function Task({ title, description, deadline, priority, completed, onEditTask })
           <td>{completed}</td>
         </tr>
       </table>
+      <button onClick={handleDeleteTask}>Delete</button>
       {showingEditForm ? form : <button onClick={handleShowForm}>Edit</button>}
     </div>
   )

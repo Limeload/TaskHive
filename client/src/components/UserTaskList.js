@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task.js"
 
 
-function UserTaskList({userTasks, onEditTask}) {
+function UserTaskList({userTasks, onEditTask, onDeleteTask}) {
 
     const taskMap =  userTasks.map(task => {
        return <Task
@@ -14,6 +14,7 @@ function UserTaskList({userTasks, onEditTask}) {
             completed={task.completed}
             key={task.id}
             onEditTask={onEditTask}
+            onDeleteTask={onDeleteTask}
         />
     })
 
