@@ -3,9 +3,10 @@ import ProjectPageTaskList from "./ProjectPageTaskList"
 
 function ProjectPage({projectId}) {
     const [project, setProject ] = useState({})
-    const taskInput = {title: "", description: "", deadline:"", priority: 0, completed: ""}
+
+    const taskInput = {title: "", description: "", deadline:"", priority: 0, completed: false}
     const [taskData, setTaskData] = useState(taskInput)
-    const [jessie, setJessie] = useState([])
+    const [addNewTasks, setaddNewTasks] = useState([])
 
     fetch(`/projects/${projectId}`)
     .then(res => res.json())
@@ -30,13 +31,13 @@ function ProjectPage({projectId}) {
         fetch("/tasks", {
             method: "POST",
             headers: {
-                "Content-Type": "aplication/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(newTask)
         })
         .then(res => res.json())
         .then(task => {
-            setJessie([...project.tasks, task])
+            setaddNewTasks([...project.tasks, task])
         })
     }
 
@@ -50,7 +51,7 @@ function ProjectPage({projectId}) {
                 <input onChange={handleTaskData} type="text" value={taskData.title} name="title" placeholder="enter task..." />
                 <input onChange={handleTaskData} type="text" value={taskData.description} name="description" placeholder="enter task description..." />
                 <input onChange={handleTaskData} type="text" value={taskData.deadline} name="deadline" placeholder="enter task deadline..." />
-                <input onChange={handleTaskData} type="number" value={taskData.priority} name="priority" placeholder="enter priority..." />
+                <input onChange={handleTaskData} type="number" value={taskData.priority} name="priority" placeholder="priority level 1-10..." />
                 <select name="completion">
                     <option value="true">true</option>
                     <option value="false">false</option>
@@ -59,7 +60,7 @@ function ProjectPage({projectId}) {
             </form>
             </div>
              <div className="project-tasks">
-                <ProjectPageTaskList projectTasks={jessie}/>
+                <ProjectPageTaskList projectTasks={addNewTasks}/>
              </div>
         </div>
     )
