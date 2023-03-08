@@ -11,8 +11,8 @@ import ProjectForm from "./ProjectForm"
 import ProjectPage from "./ProjectPage"
 
 function Profile(){
-const [projects, setProjects] = useState([])
-const [userTasks, setUserTasks] = useState([])
+const [user, setUser] = useState({})
+//const [userTasks, setUserTasks] = useState([])
 
 //LOGOUT CURRENT USER
     //     function handleLogOut() {
@@ -23,42 +23,42 @@ const [userTasks, setUserTasks] = useState([])
     //   }
 //PROFILE
 useEffect(() => {
-    fetch('/projects')
+    fetch('/users/1')
         .then(res => res.json())
-        .then(projectData => setProjects(projectData))
+        .then(user => {
+            setUser(user)
+        })
   }, [])
-// fetch("/projects")
-//      .then(res => res.json())
-//      .then(projectData => setProjects(projectData))
+console.log(user)
 
-// passes project id
-let projectId;
-const passProjectId = (id) => {
-    projectId = id
-}
+// // passes project id
+// let projectId;
+// const passProjectId = (id) => {
+//     projectId = id
+// }
 
-// project form helper function
-const addNewProject = (newProject) => {
-   const newProjectData = [...projects, newProject]
-   setProjects(newProjectData)
-}
+// // project form helper function
+// const addNewProject = (newProject) => {
+//    const newProjectData = [...projects, newProject]
+//    setProjects(newProjectData)
+// }
 
-// Task Fetch
-fetch(`/users/:id`)
-.then(res => res.json())
-.then(userTaskData => setUserTasks(userTaskData.tasks))
+// // Task Fetch
+// fetch(`/users/:id`)
+// .then(res => res.json())
+// .then(userTaskData => setUserTasks(userTaskData.tasks))
 
-//edits task
-function onEditTask(modifiedTask) {
- const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedTask : task)
- setUserTasks(updateTask)
-}
+// //edits task
+// function onEditTask(modifiedTask) {
+//  const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedTask : task)
+//  setUserTasks(updateTask)
+// }
 
-// delete tasks
-function onDeleteTask(id) {
-   const updatedUserTasks = userTasks.filter((task) => task.id !== id)
-   setUserTasks(updatedUserTasks)
- }
+// // delete tasks
+// function onDeleteTask(id) {
+//    const updatedUserTasks = userTasks.filter((task) => task.id !== id)
+//    setUserTasks(updatedUserTasks)
+//  }
  return (
     <div className='home'>
         <h1 className='text-1'>Welcome </h1>
@@ -69,12 +69,12 @@ function onDeleteTask(id) {
          <ProjectList />
          <ProjectPage />
          <ProjectForm /> */}
-        <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
+        {/* <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/> */}
          <CommentList />
         <TagList />
-        <ProjectList projects={projects} passProjectId={passProjectId}/> */
-        <ProjectPage projectId={projectId}/>
-        <ProjectForm addNewProject={addNewProject}/>
+        <ProjectList projects={user.projects} /> */
+        {/* <ProjectPage projectId={projectId}/> */}
+        {/* <ProjectForm addNewProject={addNewProject}/> */}
        </div>
     </div>
         )
