@@ -37,9 +37,6 @@ function App() {
         setProjects(newProjectData)
      }
 
-     
-
-
      // Task Fetch
      fetch("/user/:id")
      .then(res => res.json())
@@ -50,6 +47,11 @@ function App() {
       const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedUser : task)
       setUserTasks(updateTask)
      }
+
+     function onDeleteTask(id) {
+        const updatedUserTasks = userTasks.filter((task) => task.id !== id)
+        setUserTasks(updatedUserTasks)
+      }
 
   return (
     <div className="App">
@@ -62,7 +64,7 @@ function App() {
       <div className='mainContainer'>
         <Home />
         <NotFound />
-        <UserTaskList userTasks={userTasks} onEditTask={onEditTask}/>
+        <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
         <CommentList />
         <TagList />
         <ProjectList projects={projects} passProjectId={passProjectId}/>
