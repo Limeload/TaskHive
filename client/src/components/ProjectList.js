@@ -1,27 +1,30 @@
 import React from "react";
-import Project from "./Project"
+// import Project from "./Project"
 
 
 
 
 
-function ProjectList({projects, passProjectId}) {
+// function ProjectList({projects, passProjectId}) {
 
-    const projectMap = projects.map(project => {
-        return <Project
-            id={project.id}
-            name={project.name}
-            key={project.id}
-            passProjectId={passProjectId}
-        />
-    })
+//     const projectMap = projects.map(project => {
+//         return <Project
+//             id={project.id}
+//             name={project.name}
+//             key={project.id}
+//             passProjectId={passProjectId}
+//         />
+//     })
 
-    return (
-        <div className='ProjectList'>
-        {projectMap}
-        </div>
-    )
-}
+//     return (
+//         <div className='ProjectList'>
+//         {projectMap}
+//         </div>
+//     )
+// }
+
+function ProjectList(){
+    return(<div></div>)}
 
 
 export default ProjectList
