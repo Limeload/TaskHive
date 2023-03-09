@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from "react"
 import ProjectPageTaskList from "./ProjectPageTaskList"
 
-function ProjectPage({projectId}) {
-    const [project, setProject ] = useState({})
+function ProjectPage({user, onAddNewTask}) {
 
     const taskInput = {title: "", description: "", deadline:"", priority: 0, completed: false}
     const [taskData, setTaskData] = useState(taskInput)
     const [addNewTasks, setaddNewTasks] = useState([])
 
-    useEffect(() => {
-        fetch(`/projects/${projectId}`)
-            .then(res => res.json())
-            .then(projectData => setProject(projectData))
-      }, [])
+    // useEffect(() => {
+    //     fetch(`/users/1`)
+    //         .then(res => res.json())
+    //         .then(projectData => setProject(projectData))
+    //   }, [])
 
     function handleTaskData(e) {
         const { name, value } = e.target;
@@ -20,17 +19,20 @@ function ProjectPage({projectId}) {
     }
 
     function handleSubmit(e) {
-        let completionBoolean = e.target.form.completion.value
+        e.preventDefault()
+        // let completionBoolean = e.target.form.completion.value
 
         const newTask = {
             title: taskData.title,
             description: taskData.description,
             deadline:taskData.deadline,
             priority: taskData.priority,
-            completed: completionBoolean
+            completed: taskData.completed,
+            project_id: 1,
+            user_id: 1
         }
 
-        fetch("/tasks", {
+        fetch("/tasks/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -39,7 +41,9 @@ function ProjectPage({projectId}) {
         })
         .then(res => res.json())
         .then(task => {
-            setaddNewTasks([...project.tasks, task])
+            // setaddNewTasks([...project.tasks, task])
+            onAddNewTask(task)
+            setTaskData(taskInput)
         })
     }
 
@@ -47,7 +51,7 @@ function ProjectPage({projectId}) {
 
     return (
         <div>
-            <h1>{project.name}</h1>
+            <h1>Create new task</h1>
             <div className="task-form">
             <form onSubmit={handleSubmit}>
                 <input onChange={handleTaskData} type="text" value={taskData.title} name="title" placeholder="enter task..." />

@@ -1,30 +1,34 @@
 import React from "react";
-// import Project from "./Project"
+import Project from "./Project"
 
 
 
 
 
-// function ProjectList({projects, passProjectId}) {
+function ProjectList({user, onEditTask, onDeleteTask}) {
 
-//     const projectMap = projects.map(project => {
-//         return <Project
-//             id={project.id}
-//             name={project.name}
-//             key={project.id}
-//             passProjectId={passProjectId}
-//         />
-//     })
+    return (
+        <div className='ProjectList'>
+                {user.projects ? 
+                    user.projects.map(project => {
+                        return <Project
+                            id={project.id}
+                            project={project}
+                            key={project.id}
+                            onEditTask={onEditTask}
+                            onDeleteTask={onDeleteTask}
+                            // passProjectId={passProjectId}
+                        />
+                    })
+                    :
+                    <h1>Loading...</h1>
+                }           
+        </div>
+    )
+}
 
-//     return (
-//         <div className='ProjectList'>
-//         {projectMap}
-//         </div>
-//     )
-// }
-
-function ProjectList(){
-    return(<div></div>)}
+// function ProjectList(){
+//     return(<div></div>)}
 
 
 export default ProjectList
