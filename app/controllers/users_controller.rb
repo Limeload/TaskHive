@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :show]
+    # skip_before_action :authorize, only: [:create, :show, :index]
 
     #CREATE
     def create
@@ -14,8 +14,13 @@ class UsersController < ApplicationController
         render json: users, status: :ok
     end
 
+    # def show
+    #     render json: @current_user
+    # end
+
     def show
-        render json: @current_user
+        user = User.find(params[:id])
+        render json: user, include: ['projects', 'projects.tasks', 'tasks'], status: :ok
     end
 
     #UPDATE

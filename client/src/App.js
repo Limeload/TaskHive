@@ -37,14 +37,14 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/login">
+            {/* <Route path="/login">
               <ErrorBoundary>
                 <LoginForm onLogIn={onLogIn} />
                 </ErrorBoundary>
-            </Route>
-            <Route exact path='/signup'>
+            </Route> */}
+            {/* <Route exact path='/signup'>
               <SignupForm onLogIn={onLogIn}/>
-            </Route>
+            </Route> */}
             <Route path="/profile">
               <Profile />
               {/* <Profile onLogOut={onLogOut} currentUser={currentUser} /> */}

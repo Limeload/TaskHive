@@ -17,6 +17,12 @@ class TasksController < ApplicationController
         render json: task, status: :ok
     end
 
+    def update
+        task = find_task
+        task.update!(task_params)
+        render json: task, status: :accepted
+    end
+
     #DELETE
     def destroy
         task = find_task

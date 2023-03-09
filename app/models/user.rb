@@ -2,7 +2,7 @@ class User < ApplicationRecord
     #relationships
     has_many :tasks
     has_many :comments
-    has_many :projects
+    has_many :projects 
     has_secure_password
 
     #validations

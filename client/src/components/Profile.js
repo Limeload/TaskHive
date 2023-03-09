@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import ProjectList from './Project.js'
+import ProjectList from './ProjectList.js'
 import UserTaskList from './UserTaskList.js'
 import TagList from './TagList.js'
 import CommentList from './CommentList.js'
@@ -12,7 +12,7 @@ import ProjectPage from "./ProjectPage"
 
 function Profile(){
 const [user, setUser] = useState({})
-//const [userTasks, setUserTasks] = useState([])
+const [userTasks, setUserTasks] = useState([])
 
 //LOGOUT CURRENT USER
     //     function handleLogOut() {
@@ -27,9 +27,19 @@ useEffect(() => {
         .then(res => res.json())
         .then(user => {
             setUser(user)
+            setUserTasks(user.tasks)
         })
   }, [])
-console.log(user)
+
+  console.log(userTasks)
+
+//   useEffect(() => {
+//     setUserTasks(userTasks)
+//   }, [])
+
+function onAddNewTask(newTask) {
+    setUserTasks([...userTasks, newTask])
+}
 
 // // passes project id
 // let projectId;
@@ -48,17 +58,21 @@ console.log(user)
 // .then(res => res.json())
 // .then(userTaskData => setUserTasks(userTaskData.tasks))
 
-// //edits task
-// function onEditTask(modifiedTask) {
-//  const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedTask : task)
-//  setUserTasks(updateTask)
-// }
+//edits task
+function onEditTask(modifiedTask) {
+    console.log(modifiedTask)
+    console.log("hey")
+ const updateTask = userTasks.map(task => task.id === modifiedTask.id ? modifiedTask : task)
+ console.log(updateTask)
+ setUserTasks(updateTask)
+}
 
-// // delete tasks
-// function onDeleteTask(id) {
-//    const updatedUserTasks = userTasks.filter((task) => task.id !== id)
-//    setUserTasks(updatedUserTasks)
-//  }
+// delete tasks
+function onDeleteTask(deletedId) {
+   const updatedUserTasks = userTasks.filter((task) => task.id !== deletedId)
+   setUserTasks(updatedUserTasks)
+ }
+
  return (
     <div className='home'>
         <h1 className='text-1'>Welcome </h1>
@@ -72,8 +86,8 @@ console.log(user)
         {/* <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/> */}
          <CommentList />
         <TagList />
-        <ProjectList projects={user.projects} /> */
-        {/* <ProjectPage projectId={projectId}/> */}
+        <ProjectList user={user} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
+        <ProjectPage user={user} onAddNewTask={onAddNewTask}/>
         {/* <ProjectForm addNewProject={addNewProject}/> */}
        </div>
     </div>
