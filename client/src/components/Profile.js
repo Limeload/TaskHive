@@ -10,7 +10,7 @@ import NotFound from './NotFound.js'
 import ProjectForm from "./ProjectForm"
 import ProjectPage from "./ProjectPage"
 
-function Profile({currentUser, setCurrentUser}){
+function Profile({currentUser, onLogout}){
 const [user, setUser] = useState({})
 const [userTasks, setUserTasks] = useState([])
 
@@ -19,21 +19,21 @@ const [userTasks, setUserTasks] = useState([])
     fetch("/logout", { method: "DELETE" })
         .then((r) => {
                       if (r.ok) {
-                      setCurrentUser(null);
+                      onLogout();
                       }
         });
   }
 //PROFILE
 useEffect(() => {
-    fetch('/users/1')
+    fetch('/users/')
         .then(res => res.json())
-        .then(user => {
-            setUser(user)
-            setUserTasks(user.tasks)
+        .then(currentUser => {
+            onLogout(currentUser)
+            setUserTasks(currentUser.tasks)
         })
   }, [])
 
-  console.log(userTasks)
+//   console.log(userTasks)
 
 //   useEffect(() => {
 //     setUserTasks(userTasks)
@@ -77,7 +77,8 @@ function onDeleteTask(deletedId) {
 
  return (
     <div className='home'>
-        <h1 className='text-1'>Welcome <h3>{currentUser.name}</h3></h1>
+        <div>
+        <h1 className='text-1'>Welcome</h1><h3>{currentUser?.name}</h3>
          <Link to="/login" onClick={handleLogoutClick}><Button variant="warning">Log out</Button></Link>
          <div className='mainContainer'>
          <NotFound />
@@ -91,6 +92,7 @@ function onDeleteTask(deletedId) {
         <ProjectList user={user} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
         <ProjectPage user={user} onAddNewTask={onAddNewTask}/>
         {/* <ProjectForm addNewProject={addNewProject}/> */}
+       </div>
        </div>
     </div>
         )
