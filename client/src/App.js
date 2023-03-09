@@ -19,29 +19,36 @@ function App() {
     });
   }, []);
 
-console.log(currentUser);
+  function onLogin(loggedInUser) {
+    setCurrentUser(loggedInUser)
+  }
+
+  function onLogout(){
+    setCurrentUser(null)
+  }
+
+
 
   return (
-      <div className="App">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/login">
-            { (!currentUser) ? <LoginForm onLogin={setCurrentUser} /> : null};
-            </Route>
-            <Route exact path='/signup'>
-              <SignupForm />
-            </Route>
-            <Route path="/profile">
-              <Profile currentUser={currentUser} setCurrentUser={setCurrentUser} />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-  );
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+          <LoginForm onLogin={setCurrentUser} />
+          </Route>
+          <Route exact path='/signup'>
+            <SignupForm onLogin={onLogin}/>
+          </Route>
+          <Route path="/profile">
+            <Profile currentUser={currentUser} onLogout={onLogout}  />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+);
 }
-
 export default App;
 
