@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         render json: users, status: :ok
     end
 
-    def show
+    def me
         render json: @current_user, include: ['projects', 'projects.tasks', 'tasks'], status: :ok
     end
 
