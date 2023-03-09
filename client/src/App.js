@@ -11,14 +11,14 @@ function App() {
   //LOGIN FEATURE FOR CURRENT USER
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
+   // auto-login
+  fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((currentUser) => setCurrentUser(currentUser));
       }
     });
   }, []);
-
+  
 console.log(currentUser);
 
   return (
