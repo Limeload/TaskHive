@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-    # skip_before_action :authorize, only: [:create, :show, :index]
+    skip_before_action :authorize, only: [:create, :show, :index]
 
     #CREATE
     def create
-        new_user = User.create!(user_params)
-        session[:user_id] = new_user.id
-        render json: new_user, status: :created
-    end
+        user  = User.create!(user_params)
+        session[:user_id] = user.id
+        render json: user, status: :created
+      end
 
     # READ
     def index
@@ -14,13 +14,9 @@ class UsersController < ApplicationController
         render json: users, status: :ok
     end
 
-    # def show
-    #     render json: @current_user
-    # end
-
     def show
         user = User.find(params[:id])
-        render json: user, include: ['projects', 'projects.tasks', 'tasks'], status: :ok
+        render json: @current_user, include: ['projects', 'projects.tasks', 'tasks'], status: :ok
     end
 
     #UPDATE

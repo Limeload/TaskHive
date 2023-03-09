@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   # SESSIONS & COOKIES
   include ActionController::Cookies
-  # before_action :authorize
+  before_action :authorize
 
   # ERROR HANDLING
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
@@ -23,10 +23,6 @@ class ApplicationController < ActionController::API
 
   def authorize
     @current_user = User.find_by(id: session[:user_id])
-    if @current_user && BCrypt::Password.new(@current_user.password_digest) == params[:password]
-      # User is authenticated
-    else
-      render json: {errors: ["Not Authorized, please login"]}, status: :unauthorized
-    end
-  end
+    render json: {errors: ["Not Authorized, please login"]}, status: :unauthorized unless @current_user
+end
 end

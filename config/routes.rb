@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :show, :update, :destroy]
   resources :tasks, only: [:index, :show, :update, :create, :destroy ]
   resources :users, only: [:index, :show, :create, :update]
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
