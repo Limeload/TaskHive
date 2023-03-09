@@ -27,7 +27,7 @@ function App() {
     setCurrentUser(null)
   }
 
-
+console.log(currentUser);
 
   return (
     <div className="App">
@@ -37,8 +37,8 @@ function App() {
             <Home />
           </Route>
           <Route path="/login">
-          <LoginForm onLogin={setCurrentUser} />
-          </Route>
+  {(!currentUser) ? <LoginForm onLogin={setCurrentUser} /> : null}
+  </Route>
           <Route exact path='/signup'>
             <SignupForm onLogin={onLogin}/>
           </Route>
