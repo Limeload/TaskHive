@@ -15,23 +15,25 @@ const [user, setUser] = useState({})
 const [userTasks, setUserTasks] = useState([])
 
 //LOGOUT CURRENT USER
-       function handleLogoutClick() {
+function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" })
-        .then((r) => {
-                      if (r.ok) {
-                      onLogout();
-                      }
-        });
+      .then((r) => {
+        if (r.ok) {
+          onLogout(null);
+        }
+      });
   }
+
 //PROFILE
 useEffect(() => {
     fetch('/users/')
-        .then(res => res.json())
-        .then(currentUser => {
-            onLogout(currentUser)
-            setUserTasks(currentUser.tasks)
-        })
-  }, [])
+      .then(res => res.json())
+      .then(user => {
+        setUser(user);
+        setUserTasks(user.tasks);
+      })
+  }, []);
+
 
 //   console.log(userTasks)
 
@@ -79,6 +81,7 @@ function onDeleteTask(deletedId) {
     <div className='home'>
         <div>
         <h1 className='text-1'>Welcome</h1><h3>{currentUser?.name}</h3>
+        </div>
          <Link to="/login" onClick={handleLogoutClick}><Button variant="warning">Log out</Button></Link>
          <div className='mainContainer'>
          <NotFound />
@@ -92,7 +95,6 @@ function onDeleteTask(deletedId) {
         <ProjectList user={user} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
         <ProjectPage user={user} onAddNewTask={onAddNewTask}/>
         {/* <ProjectForm addNewProject={addNewProject}/> */}
-       </div>
        </div>
     </div>
         )
