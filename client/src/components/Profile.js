@@ -15,13 +15,20 @@ function Profile({ onLogOut, currentUser }) {
     const [userTasks, setUserTasks] = useState([])
     const [userProjects, setUserProjects] = useState([])
 
-    //LOGOUT CURRENT USER
-    function handleLogOut() {
-        fetch('/logout', {
-            method: 'DELETE'
-        })
-            .then(() => onLogOut())
-    }
+function Profile({currentUser, setCurrentUser}){
+const [user, setUser] = useState({})
+const [userTasks, setUserTasks] = useState([])
+
+//LOGOUT CURRENT USER
+       function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" })
+        .then((r) => {
+                      if (r.ok) {
+                      setCurrentUser(null);
+                     }
+        });
+  }
+
     //PROFILE
     useEffect(() => {
         fetch(`/users/${currentUser.id}`)
@@ -70,14 +77,14 @@ function Profile({ onLogOut, currentUser }) {
         setUserTasks(updatedUserTasks)
     }
 
-    return (
-        <div className='home'>
-            <h1 className='text-1'>Welcome</h1>
-            <Link to="/login" onClick={handleLogOut}><Button variant="warning">Log out</Button></Link>
-            <div className='mainContainer'>
-                <NotFound />
-                {/* <UserTaskList /> */}
-                {/* <ProjectList />
+ return (
+    <div className='home'>
+        <h1 className='text-1'>Welcome <h3>{currentUser?.name}</h3></h1>
+         <Link to="/login" onClick={handleLogoutClick}><Button variant="warning">Log out</Button></Link>
+         <div className='mainContainer'>
+         <NotFound />
+         {/* <UserTaskList /> */}
+         {/* <ProjectList />
          <ProjectPage /> */}
                 {/* <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/> */}
                 <CommentList />

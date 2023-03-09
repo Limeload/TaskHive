@@ -5,32 +5,23 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginForm from './components/LoginForm.js';
 import SignupForm from './components/SignupForm.js';
 import './App.css';
-import UserContextProvider from "./components/UserContext.js";
+// import UserContextProvider from "./components/UserContext.js";
 
 function App() {
   //LOGIN FEATURE FOR CURRENT USER
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    fetch('/me')
-      .then(response => {
-        if(response.ok) {
-          response.json()
-          .then((user) => setCurrentUser(user))
-        }
-      })
-  }, [])
+   // auto-login
+  fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((currentUser) => setCurrentUser(currentUser));
+      }
+    });
+  }, []);
   
-  function onLogIn(loggedInUser) {
-    setCurrentUser(loggedInUser)
-  }
-
-  console.log(currentUser)
-  function onLogOut(){
-    setCurrentUser(null)
-  }
+console.log(currentUser);
 
   return (
-    <UserContextProvider>
       <div className="App">
         <Router>
           <Switch>
@@ -38,18 +29,17 @@ function App() {
               <Home />
             </Route>
             <Route path="/login">
-                <LoginForm onLogIn={onLogIn} />
+            { (!currentUser) ? <LoginForm onLogin={setCurrentUser} /> : null};
             </Route>
             <Route exact path='/signup'>
-              <SignupForm onLogIn={onLogIn}/>
+              <SignupForm />
             </Route>
             <Route path="/profile">
-              <Profile onLogOut={onLogOut} currentUser={currentUser} />
+              <Profile currentUser={currentUser} setCurrentUser={setCurrentUser} />
             </Route>
           </Switch>
         </Router>
       </div>
-    </UserContextProvider>
   );
 }
 
