@@ -51,28 +51,28 @@ function ProjectPage({ onAddNewTask }) {
             type="text"
             value={taskData.title}
             name="title"
-            placeholder="enter task..."
+            placeholder="task..."
           />
           <input
             onChange={handleTaskData}
             type="text"
             value={taskData.description}
             name="description"
-            placeholder="enter task description..."
+            placeholder="task description..."
           />
           <input
             onChange={handleTaskData}
             type="text"
             value={taskData.deadline}
             name="deadline"
-            placeholder="enter task deadline..."
+            placeholder="task deadline..."
           />
           <input
             onChange={handleTaskData}
             type="number"
             value={taskData.priority}
             name="priority"
-            placeholder="priority level 1-10..."
+            placeholder="1-10"
           />
           <select
             onChange={handleTaskData}

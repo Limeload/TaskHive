@@ -10,10 +10,12 @@ import NotFound from './NotFound.js'
 import ProjectForm from "./ProjectForm"
 import ProjectPage from "./ProjectPage"
 
-function Profile({currentUser, onLogout}){
-const [user, setUser] = useState({})
-const [userTasks, setUserTasks] = useState([])
-const [userProjects, setUserProjects] = useState([])
+
+function Profile({ currentUser, setCurrentUser}) {
+    const [user, setUser] = useState({})
+    const [userTasks, setUserTasks] = useState([])
+    const [userProjects, setUserProjects] = useState([])
+
 //LOGOUT CURRENT USER
        function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" })
@@ -26,16 +28,16 @@ const [userProjects, setUserProjects] = useState([])
 
     //PROFILE
     useEffect(() => {
-        fetch(`/users/${currentUser.id}`)
+        fetch("/users/1")
             .then(res => res.json())
             .then(user => {
                 setUser(user)
                 setUserTasks(user.tasks)
                 setUserProjects(user.projects)
             })
-    }, [currentUser])
-
-    console.log(userTasks)
+    }, [])
+    console.log("current user: ", currentUser)
+    console.log("user: ", user)
 
     //   useEffect(() => {
     //     setUserTasks(userTasks)
@@ -83,18 +85,17 @@ const [userProjects, setUserProjects] = useState([])
          {/* <UserTaskList /> */}
          {/* <ProjectList />
          <ProjectPage /> */}
-          <ProjectList user={user} onEditTask={onEditTask} onDeleteTask={onDeleteTask} />
-          <ProjectPage user={user} onAddNewTask={onAddNewTask} />
-         <ProjectForm />
-        {/* <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/> */}
-         <CommentList />
-        <TagList />
-   
-        {/* <ProjectForm addNewProject={addNewProject}/> */}
-       </div>
-       </div>
-    </div>
-        )
+                {/* <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/> */}
+                <CommentList />
+                <TagList />
+                <ProjectList user={user} onEditTask={onEditTask} onDeleteTask={onDeleteTask} />
+                <ProjectPage user={user} onAddNewTask={onAddNewTask} />
+                <ProjectForm user={user} addNewProject={addNewProject} />
+            </div>
+        </div>
+    )
+}
     }
               
 export default Profile;
+

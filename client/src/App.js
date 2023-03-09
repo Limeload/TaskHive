@@ -14,11 +14,11 @@ function App() {
    // auto-login
   fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((currentUser) => setCurrentUser(currentUser));
+        r.json().then((currentUser) => setCurrentUser(!currentUser));
       }
     });
   }, []);
-  
+
 console.log(currentUser);
 
   return (
@@ -29,7 +29,7 @@ console.log(currentUser);
               <Home />
             </Route>
             <Route path="/login">
-            { (!currentUser) ? <LoginForm onLogin={setCurrentUser} /> : null};
+           <LoginForm onLogin={setCurrentUser} />
             </Route>
             <Route exact path='/signup'>
               <SignupForm />
