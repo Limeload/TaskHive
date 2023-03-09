@@ -10,17 +10,19 @@ import NotFound from './NotFound.js'
 import ProjectForm from "./ProjectForm"
 import ProjectPage from "./ProjectPage"
 
-function Profile({onLogOut}){
+function Profile({currentUser, setCurrentUser}){
 const [user, setUser] = useState({})
 const [userTasks, setUserTasks] = useState([])
 
 //LOGOUT CURRENT USER
-        function handleLogOut() {
-          fetch('/logout', {
-              method: 'DELETE'
-          })
-              .then(() => onLogOut())
-      }
+       function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" })
+        .then((r) => {
+                      if (r.ok) {
+                      setCurrentUser(null);
+                      }
+        });
+  }
 //PROFILE
 useEffect(() => {
     fetch('/users/1')
@@ -75,8 +77,8 @@ function onDeleteTask(deletedId) {
 
  return (
     <div className='home'>
-        <h1 className='text-1'>Welcome</h1>
-         <Link to="/login" onClick={handleLogOut}><Button variant="warning">Log out</Button></Link>
+        <h1 className='text-1'>Welcome <h3>{currentUser.name}</h3></h1>
+         <Link to="/login" onClick={handleLogoutClick}><Button variant="warning">Log out</Button></Link>
          <div className='mainContainer'>
          <NotFound />
          {/* <UserTaskList /> */}
