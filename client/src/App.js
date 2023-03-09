@@ -19,11 +19,12 @@ function App() {
         }
       })
   }, [])
-
+  
   function onLogIn(loggedInUser) {
     setCurrentUser(loggedInUser)
   }
 
+  console.log(currentUser)
   function onLogOut(){
     setCurrentUser(null)
   }

@@ -1,16 +1,18 @@
 import React, {useState} from "react"
 
 
-function ProjectForm({addNewProject}) {
+function ProjectForm({addNewProject, user}) {
     const [projectName, setProjectName] = useState("")
 
     function handleProjectName(e) {
         setProjectName(e.target.value)
     }
 
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault()
         const newProject = {
-            name: projectName
+            name: projectName,
+            user_id: user.id
         }
 
         fetch("/projects", {
