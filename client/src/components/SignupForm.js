@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState } from 'react'
 import { Button, Form} from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import register from '../images/register.png';
 
 function SignUpForm({ onLogIn }) {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    let history = useHistory()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -28,7 +28,7 @@ function SignUpForm({ onLogIn }) {
                 if(res.ok) {
                     res.json()
                     .then(newUser => onLogIn(newUser))
-                    history.push('/home')
+                    window.location.href = '/home'
                 }
             })
         setName("")
@@ -40,6 +40,8 @@ function SignUpForm({ onLogIn }) {
         <div className="login-form">
             <div className='form'>
             <Link className='link' exact to='/'><h1>TaskHive</h1></Link>
+            <img className="register-img" src={register} alt={register} />
+
             <br />
         <h1 className='text-1'>Create an Account</h1>
         <Form onSubmit={handleSubmit}>

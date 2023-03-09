@@ -14,7 +14,7 @@ function Project({id, project, onEditTask, onDeleteTask}) {
     return (
         <div className='Project'>
         <h2>{project.name}</h2>
-        {project.tasks ? 
+        {project.tasks ?
             project.tasks.map(task => {
                 return <Task
                      id={task.id}

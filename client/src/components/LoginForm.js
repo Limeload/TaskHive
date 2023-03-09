@@ -1,18 +1,15 @@
-import React, { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
-import UserContext from './UserContext';
+import login from '../images/login.jpg';
 
 function LoginForm ({ onLogIn }) {
-    const userContext = useContext(UserContext);
-    const { setUser } = userContext;
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    let history = useHistory();
+    // let history = useHistory();
 
     function handleSubmit(e){
         e.preventDefault();
-        setUser({name});
         fetch("/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -21,7 +18,7 @@ function LoginForm ({ onLogIn }) {
         .then(res => res.json())
         .then(loggedInUser => {
             onLogIn(loggedInUser);
-            history.push('/profile');
+            window.location.href = '/profile'
             setName("");
             setPassword("");
         });
@@ -33,6 +30,7 @@ function LoginForm ({ onLogIn }) {
             <div className='form'>
                 <Link className='link' to='/'><h1>TaskHive</h1></Link>
                 <br />
+                <img className="login-img" src={login} alt={login} />
                 <h1 className='text-1'>WELCOME BACK!</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
