@@ -28,7 +28,7 @@ function SignUpForm({ onLogIn }) {
                 if(res.ok) {
                     res.json()
                     .then(newUser => onLogIn(newUser))
-                    window.location.href = '/home'
+                    window.location.href = '/profile'
                 }
             })
         setName("")
@@ -66,7 +66,7 @@ function SignUpForm({ onLogIn }) {
                 value={email}
                 onChange= {(e) => setEmail(e.target.value)}/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
                <Form.Label>Create Password</Form.Label>
                 <Form.Control
                 required

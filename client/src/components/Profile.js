@@ -10,6 +10,7 @@ import NotFound from './NotFound.js'
 import ProjectForm from "./ProjectForm"
 import ProjectPage from "./ProjectPage"
 
+
 function Profile({ currentUser, setCurrentUser}) {
     const [user, setUser] = useState({})
     const [userTasks, setUserTasks] = useState([])
@@ -20,8 +21,8 @@ function Profile({ currentUser, setCurrentUser}) {
     fetch("/logout", { method: "DELETE" })
         .then((r) => {
                       if (r.ok) {
-                      setCurrentUser(null);
-                     }
+                      onLogout();
+                      }
         });
   }
 
@@ -75,6 +76,8 @@ function Profile({ currentUser, setCurrentUser}) {
 
  return (
     <div className='home'>
+
+        <div>
         <h1 className='text-1'>Welcome <h3>{currentUser?.name}</h3></h1>
          <Link to="/login" onClick={handleLogoutClick}><Button variant="warning">Log out</Button></Link>
          <div className='mainContainer'>
@@ -92,6 +95,7 @@ function Profile({ currentUser, setCurrentUser}) {
         </div>
     )
 }
+    }
+              
+export default Profile;
 
-
-export default Profile
