@@ -11,10 +11,10 @@ function App() {
   //LOGIN FEATURE FOR CURRENT USER
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-   // auto-login
-  fetch("/me").then((r) => {
+    // auto-login
+    fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((currentUser) => setCurrentUser(!currentUser));
+        r.json().then((currentUser) => setCurrentUser(currentUser));
       }
     });
   }, []);
@@ -29,7 +29,7 @@ console.log(currentUser);
               <Home />
             </Route>
             <Route path="/login">
-           <LoginForm onLogin={setCurrentUser} />
+            { (!currentUser) ? <LoginForm onLogin={setCurrentUser} /> : null};
             </Route>
             <Route exact path='/signup'>
               <SignupForm />
