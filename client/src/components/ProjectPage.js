@@ -1,21 +1,26 @@
 import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import ProjectPageTaskList from "./ProjectPageTaskList";
 
 function ProjectPage({ user, userProjects, onAddNewTask }) {
-
-let globalProject;
-userProjects.forEach(project => {
-  globalProject = project
-})
-
+  // let globalProject;
+  // userProjects.forEach((project) => {
+  //   globalProject = project;
+  //});
   const taskInput = {
     title: "",
     description: "",
     deadline: "",
     priority: 0,
     completed: false,
-    projectName: "",
+    project_name: "",
   };
+
+  let globalProject = userProjects.filter(project => {
+   return project.name === taskInput.project_name
+  })
+
+
   const [taskData, setTaskData] = useState(taskInput);
   const [addNewTasks, setAddNewTasks] = useState([]);
 
@@ -50,59 +55,88 @@ userProjects.forEach(project => {
 
   return (
     <div>
-      <h1>Create new task</h1>
+      <h3>Create new task</h3>
       <div className="task-form">
-        <form onSubmit={handleSubmit}>
-          <input
-            onChange={handleTaskData}
-            type="text"
-            value={taskData.title}
-            name="title"
-            placeholder="task..."
-          />
-          <input
-            onChange={handleTaskData}
-            type="text"
-            value={taskData.description}
-            name="description"
-            placeholder="task description..."
-          />
-          <input
-            onChange={handleTaskData}
-            type="text"
-            value={taskData.deadline}
-            name="deadline"
-            placeholder="task deadline..."
-          />
-          <input
-            onChange={handleTaskData}
-            type="number"
-            value={taskData.priority}
-            name="priority"
-            placeholder="1-10"
-          />
-          <select
-            onChange={handleTaskData}
-            value={taskData.completed}
-            name="completed"
-          >
-            <option value={false}>false</option>
-            <option value={true}>true</option>
-          </select>
-          <input
-           onChange={handleTaskData}
-           type="text"
-           value={taskData.projectName}
-           name="projectName"
-           placeholder="Project Name"/>
-          <button type="submit">Add New Task</button>
-        </form>
-      </div>
-      <div className="project-tasks">
-        <ProjectPageTaskList projectTasks={addNewTasks} />
-      </div>
-    </div>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="title">
+            <Form.Label>Task</Form.Label>
+            <Form.Control
+              type="text"
+              value={taskData.title}
+              name="title"
+              placeholder="Task..."
+              onChange={handleTaskData}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="description">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              value={taskData.description}
+              name="description"
+              placeholder="Task description..."
+              onChange={handleTaskData}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="deadline">
+            <Form.Label>Deadline</Form.Label>
+            <Form.Control
+              type="text"
+              value={taskData.deadline}
+              name="deadline"
+              placeholder="MM/DD/YYY"
+              onChange={handleTaskData}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="priority">
+            <Form.Label>Priority</Form.Label>
+            <Form.Control
+              type="number"
+              value={taskData.priority}
+              name="priority"
+              placeholder="1-10"
+              onChange={handleTaskData}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="completed">
+            <Form.Label>Completed</Form.Label>
+            <Form.Control
+              as="select"
+              value={taskData.completed}
+              name="completed"
+              onChange={handleTaskData}
+            >
+              <option value={false}>false</option>
+              <option value={true}>true</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+        <Form.Label>Project Name:</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter project name"
+          name="projectName"
+          value={taskData.project_name}
+          onChange={handleTaskData}
+        />
+      </Form.Group>
+
+      <Button className="btn-feature" variant="primary" type="submit">
+        Add New Task
+      </Button>
+
+    </Form>
+  </div>
+
+  <div className="project-tasks">
+    <ProjectPageTaskList projectTasks={addNewTasks} />
+  </div>
+</div>
   );
 }
-
 export default ProjectPage;

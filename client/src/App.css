@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: rgb(235, 225, 225);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 2em 12em 12em;
 }
 
 .home-img{
@@ -28,4 +31,24 @@ p{
 
 .link{
   text-decoration: none;
+}
+
+.Task {
+  color:rgb(219, 27, 27)
+}
+
+.task-item{
+background-color: rgb(152, 204, 228);
+}
+
+.project-name{
+  padding: 2rem 2rem 2rem;
+}
+
+.btn-feature{
+margin: 2rem 0.5rem 0.5rem;
+}
+
+.project-form{
+  padding-top: 5rem;
 }
