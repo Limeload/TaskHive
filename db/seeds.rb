@@ -20,12 +20,12 @@ puts "project data seeded!"
 
 #Task Data
 puts "seeding task data..."
-header = Task.create!(title:"create header" , description: "create the header for project", deadline: "2023-03-22 2:30:00", priority:rand(1...10), user_id: athena.id ,project_id:limes.id, completed: true, project_name: "Limes" )
-components = Task.create!(title:"create components ", description:"finish the extra react components", deadline: "2023-03-29 2:30:00", priority:rand(1...10), user_id:lucy.id ,project_id:task_manager.id, completed:true, project_name: "Tasker" )
-backend =Task.create!(title:"finish up backend" , description: "needs extra validations", deadline:"2023-03-21 5:30:00", priority:rand(1...10), user_id:apollo.id ,project_id:book_keeper.id, completed:false, project_name: "The Book Keeper"  )
-bug = Task.create!(title:"fix bug" , description:"bug in app component", deadline:"2023-03-25 2:30:00", priority:rand(1...10), user_id:tisha.id ,project_id:whistles.id, completed: false, project_name: "Sparklin Whistles")
-css = Task.create!(title:"add css", description:"app needs styling", deadline:"2023-03-20 2:30:00", priority:rand(1...10), user_id: candy.id ,project_id:cereal.id, completed: true, project_name: "Cereal Rater")
-render_data = Task.create!(title:"render data" , description:"render data on the main page", deadline:"2023-03-22 1:30:00", priority:rand(1...10), user_id:athena.id  ,project_id:limes.id, completed:false, project_name: "Limes" )
+header = Task.create!(title:"create header" , description: "create the header for project", deadline: "2023-03-22 2:30:00", priority:rand(1...10), completed: true, project_name: "Limes", user_id: athena.id ,project_id:limes.id)
+components = Task.create!(title:"create components ", description:"finish the extra react components", deadline: "2023-03-29 2:30:00", priority:rand(1...10), completed: true, project_name: "Tasker", user_id:lucy.id ,project_id:task_manager.id)
+backend =Task.create!(title:"finish up backend" , description: "needs extra validations", deadline:"2023-03-21 5:30:00", priority:rand(1...10), completed: false, project_name: "The Book Keeper", user_id:apollo.id ,project_id:book_keeper.id)
+bug = Task.create!(title:"fix bug" , description:"bug in app component", deadline:"2023-03-25 2:30:00", priority:rand(1...10), completed:false, project_name: "Sparklin Whistles", user_id:tisha.id ,project_id:whistles.id)
+css = Task.create!(title:"add css", description:"app needs styling", deadline:"2023-03-20 2:30:00", priority:rand(1...10), completed: true, project_name: "Cereal Rater", user_id: candy.id ,project_id:cereal.id)
+render_data = Task.create!(title:"render data" , description:"render data on the main page", deadline:"2023-03-22 1:30:00", priority:rand(1...10), completed: false, project_name: "Limes", user_id:athena.id  ,project_id:limes.id)
 puts "task data seeded!"
 
 #Tag data

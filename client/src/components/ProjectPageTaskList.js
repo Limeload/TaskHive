@@ -12,6 +12,7 @@ function ProjectPageTaskList({projectTasks}) {
             deadline={projectTask.deadline}
             priority={projectTask.priority}
             completed={projectTask.completed}
+            project_name={projectTask.project_name}
             key={projectTask.id}
         />
     })
