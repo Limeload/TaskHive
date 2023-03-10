@@ -100,7 +100,7 @@ function Task({id, title, description, deadline, priority, completed, project_na
     fetch(`/tasks/${id}`, {
       method: "DELETE"
     }).then(() => onDeleteTask(id));
-    window.location.href = '/profile'
+    // window.location.href = '/profile'
   }
 
   return (

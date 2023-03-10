@@ -29,7 +29,7 @@ function Profile({ currentUser, onLogout }) {
 
   // PROFILE
   useEffect(() => {
-  //setInterval(() => {
+  setInterval(() => {
     fetch(`/me`)
       .then((res) => res.json())
       .then((user) => {
@@ -37,7 +37,7 @@ function Profile({ currentUser, onLogout }) {
         setUserTasks(user.tasks);
         setUserProjects(user.projects);
       });
-   //},1000)
+   },1000)
   }, []);
 
   console.log(userTasks);

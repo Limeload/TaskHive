@@ -50,7 +50,7 @@ function ProjectPage({ user, userProjects, onAddNewTask }) {
         setAddNewTasks([...addNewTasks, task]);
         onAddNewTask(task);
         setTaskData(taskInput);
-        window.location.href = '/profile'
+        // window.location.href = '/profile'
       });
   }
 
