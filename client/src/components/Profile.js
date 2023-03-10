@@ -13,6 +13,7 @@ import ProjectPage from "./ProjectPage"
 function Profile({currentUser, onLogout}){
 const [user, setUser] = useState({})
 const [userTasks, setUserTasks] = useState([])
+const [userProjects, setUserProjects] = useState([])
 
 //LOGOUT CURRENT USER
 function handleLogoutClick() {
@@ -26,15 +27,17 @@ function handleLogoutClick() {
 
 //PROFILE
 useEffect(() => {
-    fetch('/users/')
+    fetch(`/me`)
       .then(res => res.json())
       .then(user => {
         setUser(user);
         setUserTasks(user.tasks);
+        setUserProjects(user.projects)
       })
-  }, []);
+  }, [currentUser]);
 
-
+console.log(currentUser);
+console.log(user);
 //   console.log(userTasks)
 
 //   useEffect(() => {
@@ -52,10 +55,10 @@ function onAddNewTask(newTask) {
 // }
 
 // // project form helper function
-// const addNewProject = (newProject) => {
-//    const newProjectData = [...projects, newProject]
-//    setProjects(newProjectData)
-// }
+const addNewProject = (newProject) => {
+   const newProjectData = [...userProjects, newProject]
+   setUserProjects(newProjectData)
+}
 
 // // Task Fetch
 // fetch(`/users/:id`)
@@ -82,19 +85,19 @@ function onDeleteTask(deletedId) {
         <div>
         <h1 className='text-1'>Welcome</h1><h3>{currentUser?.name}</h3>
         </div>
-         <Link to="/login" onClick={handleLogoutClick}><Button variant="warning">Log out</Button></Link>
+         <Link to="/login" onClick={handleLogoutClick}><Button variant="primary">Log out</Button></Link>
          <div className='mainContainer'>
          <NotFound />
          {/* <UserTaskList /> */}
          {/* <ProjectList />
          <ProjectPage /> */}
-         <ProjectForm />
+         {/* <ProjectForm /> */}
         {/* <UserTaskList userTasks={userTasks} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/> */}
          <CommentList />
         <TagList />
         <ProjectList user={user} onEditTask={onEditTask} onDeleteTask={onDeleteTask}/>
-        <ProjectPage user={user} onAddNewTask={onAddNewTask}/>
-        {/* <ProjectForm addNewProject={addNewProject}/> */}
+        <ProjectPage user={user} userProjects={userProjects} onAddNewTask={onAddNewTask}/>
+        <ProjectForm user={user} addNewProject={addNewProject}/>
        </div>
     </div>
         )

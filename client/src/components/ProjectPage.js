@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import ProjectPageTaskList from "./ProjectPageTaskList";
 
-function ProjectPage({ onAddNewTask }) {
+function ProjectPage({ user, userProjects, onAddNewTask }) {
+
+let globalProject;
+userProjects.forEach(project => {
+  globalProject = project
+})
+
   const taskInput = {
     title: "",
     description: "",
     deadline: "",
     priority: 0,
     completed: false,
+    projectName: "",
   };
   const [taskData, setTaskData] = useState(taskInput);
   const [addNewTasks, setAddNewTasks] = useState([]);
@@ -22,8 +29,8 @@ function ProjectPage({ onAddNewTask }) {
 
     const newTask = {
       ...taskData,
-      project_id: 1,
-      user_id: 1,
+      project_id: globalProject.id,
+      user_id: user.id,
     };
 
     fetch("/tasks/", {
@@ -82,6 +89,12 @@ function ProjectPage({ onAddNewTask }) {
             <option value={false}>false</option>
             <option value={true}>true</option>
           </select>
+          <input
+           onChange={handleTaskData}
+           type="text"
+           value={taskData.projectName}
+           name="projectName"
+           placeholder="Project Name"/>
           <button type="submit">Add New Task</button>
         </form>
       </div>
