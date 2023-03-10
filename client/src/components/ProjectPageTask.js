@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 
-function ProjectPageTask({ title, description, deadline, priority, completed }) {
+function ProjectPageTask({ title, description, deadline, priority, completed, project_name }) {
   return (
     <div className="Task">
       <Table striped bordered hover>
@@ -12,6 +12,7 @@ function ProjectPageTask({ title, description, deadline, priority, completed }) 
             <th>Deadline</th>
             <th>Priority</th>
             <th>Completed</th>
+            <th>Project Name</th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@ function ProjectPageTask({ title, description, deadline, priority, completed }) 
             <td>{deadline}</td>
             <td>{priority}</td>
             <td>{completed ? "true" : "false"}</td>
+            <td>{project_name}</td>
           </tr>
         </tbody>
       </Table>

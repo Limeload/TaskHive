@@ -25,7 +25,7 @@ function ProjectForm({addNewProject, user}) {
     })
     .then(res => res.json())
     .then(addNewProject)
-
+    // window.location.href = '/profile'
     }
 
     return (

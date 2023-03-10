@@ -23,6 +23,7 @@ function Project({id, project, onEditTask, onDeleteTask}) {
                      deadline={task.deadline}
                      priority={task.priority}
                      completed={task.completed}
+                     project_name={task.project_name}
                      key={task.id}
                      onEditTask={onEditTask}
                      onDeleteTask={onDeleteTask}

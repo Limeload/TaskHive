@@ -3,10 +3,11 @@ import { Form, Button } from "react-bootstrap";
 import ProjectPageTaskList from "./ProjectPageTaskList";
 
 function ProjectPage({ user, userProjects, onAddNewTask }) {
-  // let globalProject;
-  // userProjects.forEach((project) => {
-  //   globalProject = project;
-  //});
+  let globalProject;
+   userProjects.forEach((project) => {
+   return globalProject = project;
+  });
+  console.log(globalProject)
   const taskInput = {
     title: "",
     description: "",
@@ -16,11 +17,6 @@ function ProjectPage({ user, userProjects, onAddNewTask }) {
     project_name: "",
   };
 
-  let globalProject = userProjects.filter(project => {
-   return project.name === taskInput.project_name
-  })
-
-
   const [taskData, setTaskData] = useState(taskInput);
   const [addNewTasks, setAddNewTasks] = useState([]);
 
@@ -28,10 +24,14 @@ function ProjectPage({ user, userProjects, onAddNewTask }) {
     const { name, value } = e.target;
     setTaskData({ ...taskData, [name]: value });
   }
+  //et globalProject = userProjects.filter(project => {
+   // return project.name === taskInput.project_name
+   //})
+
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    console.log(e.target.value)
     const newTask = {
       ...taskData,
       project_id: globalProject.id,
@@ -50,6 +50,7 @@ function ProjectPage({ user, userProjects, onAddNewTask }) {
         setAddNewTasks([...addNewTasks, task]);
         onAddNewTask(task);
         setTaskData(taskInput);
+        // window.location.href = '/profile'
       });
   }
 
@@ -120,7 +121,7 @@ function ProjectPage({ user, userProjects, onAddNewTask }) {
         <Form.Control
           type="text"
           placeholder="Enter project name"
-          name="projectName"
+          name="project_name"
           value={taskData.project_name}
           onChange={handleTaskData}
         />

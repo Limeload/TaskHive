@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProjectList from "./ProjectList.js";
 import TagList from "./TagList.js";
-import CommentList from "./CommentList.js";
+// import CommentList from "./CommentList.js";
 import NotFound from "./NotFound.js";
 import ProjectForm from "./ProjectForm";
 import ProjectPage from "./ProjectPage";
@@ -12,7 +12,11 @@ function Profile({ currentUser, onLogout }) {
   const [user, setUser] = useState({});
   const [userTasks, setUserTasks] = useState([]);
   const [userProjects, setUserProjects] = useState([]);
-  
+  // const [formCreateTask, setFormCreateTask] = useState(false);
+
+  // function handleCreateNewTask(){
+  // setFormCreateTask(!formCreateTask);
+  // }
 
   // LOGOUT CURRENT USER
   function handleLogoutClick() {
@@ -25,7 +29,7 @@ function Profile({ currentUser, onLogout }) {
 
   // PROFILE
   useEffect(() => {
-    setInterval( () => {
+  setInterval(() => {
     fetch(`/me`)
       .then((res) => res.json())
       .then((user) => {
@@ -33,8 +37,10 @@ function Profile({ currentUser, onLogout }) {
         setUserTasks(user.tasks);
         setUserProjects(user.projects);
       });
-  },1000)
-  }, [currentUser]);
+   },1000)
+  }, []);
+
+  console.log(userTasks);
 
   function onAddNewTask(newTask) {
     setUserTasks([...userTasks, newTask]);
