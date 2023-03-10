@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     private
     #User Params (create, update)
     def user_params
-        params.permit(:name, :email, :password)
+        params.permit(:name, :email, :password, :password_confirmation)
     end
 
     #Find User(read, Update)
